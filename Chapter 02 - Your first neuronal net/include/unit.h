@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -20,12 +22,10 @@ struct Unit :  std::enable_shared_from_this<Unit>{
         std::function<void()> backward; // A backward function that is called during backpropagation
 
     // Unit contructor with childrens
-    Unit(double d, const std::vector<std::shared_ptr<Unit>>& c = {}, const std::string& l = "") 
-    : data(d), children(c), label(l), grad(0.0), backward([](){}) {};
+    Unit(double d, const std::vector<std::shared_ptr<Unit>>& c = {}, const std::string& l = "");
 
     // Basic Unit constructor without childrens
-    Unit(double d, const std::string& l)
-    : data(d), children({}), label(l), backward([](){}) {};
+    Unit(double d, const std::string& l);
 
     // This functions prints a clean message with Unit info
     std::string toString() const;

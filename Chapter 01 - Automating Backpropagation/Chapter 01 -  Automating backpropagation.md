@@ -1,14 +1,12 @@
 # Chapter 01 - Automating backpropagation
 
-## 1. Introducción
-
 Una vez comprendidas las matemáticas que hay detras del aprendizaje de las redes neuronales, vamos nuestro primer mini framework de redes neuronales, que nos permita automatizar la retropropagación del gradiente y entrenar nuestros primeros modelos de forma efectiva.
 
 Este capitulo no pretende explicar el código línea por línea, sino exponer la lógica detrás del código y como este ha sido diseñado. Para aprender más sobre la implementación, en cada subapartado se indicarán las rutas con el código comentado para que pueda revisarlo junto con la explicación.
 
 Destacar que este capítulo esta altamente inspirado en el repositorio de mircrograd de Andrej Karpathy, recomiendo echar un vistazo tanto a su código, como al vídeo que tiene haciéndolo desde cero, ambos enlaces en la bibliografía.
 
-## 2. Clase Unit
+## 1. Clase Unit
 
 > Definición de la clase en `/include/unit.h`
 
@@ -41,7 +39,7 @@ Por ello, nuestra clase Unit va a tener los siguientes atributos:
 
 - `vector<shared_ptr<Unit>> children`: Almacena una lista de punteros en memoria a los hijos de este Unit, que serán otros Unit. Por ejemplo, para el Unit `d`, sus hijos serán `a` y `b`.
 
-### 2.1. Función de retropropagación
+### 1.1. Función de retropropagación
 
 La única función asociada a esta clase es la denominada `void retropropagate()`, que como su propio nombre indica, se encarga de inicializar la retropropagación del gradiente desde el nodo en el que se haya llamado.
 
@@ -49,7 +47,7 @@ Esta no recibe ningún parámetro, ya que su única tarea es ir hacia detrás vi
 
 Debemos de conocer esto, ya que es indispensable propagar el gradiente en el orden correcto, según se hayan creado los nodos, desde el último hasta el primero. Por ello, la función a continuación invierte este orden y llama a las funciones `backward` de cada Unit, estableciendo antes el gradiente del nodo actual a 1.0, para que al propagarse, no de todo 0.0.
 
-## 3. Operaciones
+## 2. Operaciones
 
 > Definición de las operaciones en `/include/ops.h`
 
@@ -138,7 +136,17 @@ Según la operación tendremos:
 
 > En el archivo `/tests/01_basic_computation_graph.cpp.h` podrás encontrar un pequeño código con la creación del grafo computacional de este ejemplo, y como al llamar a la función `retropropagate()`, el gradiente se propaga correctamente a todos sus nodos.
 
-## 4. Detalles del código y gestión de memoria
+Linux (en `/src`):
+```
+g++ ../tests/00_basic_computation_graph.cpp ops.cpp unit.cpp -I../include -o test_basic_computation_graph && ./test_basic_computation_graph
+```
+
+Windows (en `/src`):
+```
+g++ ../tests/00_basic_computation_graph.cpp ops.cpp unit.cpp -I../include -o test_basic_computation_graph.exe && .\test_basic_computation_graph.exe
+```
+
+## 3. Detalles del código y gestión de memoria
 
 Si nos fijamos en el código, tanto de la clase `Unit` como de las operaciones, encontramos un elemento esencial para la arquitectura de nuestro framework: los punteros inteligentes `std::shared_ptr`. En BlockTorch, todos los nodos están envueltos en ellos.
 
@@ -154,8 +162,6 @@ Esto nos permite construir arquitecturas complejas sin tener que destruir manual
 Toda ventaja tiene su inconveniente, el precio de estos punteros es que son más lentos que los clásicos, por ellos frameworks como PyTorch usan sus propias clases de punteros personalizados para obtener más rendimiento.
 
 ## 4. Bibliografía y Recursos Adicionales
-
-
 
 **Vídeos y Cursos**
 * [Lecture 4 | Introduction to Neural Networks ](https://www.youtube.com/watch?v=d14TUNcbn1k) - Standfor University School of Engineering. Lectura oficial de la Universidad de Standfor sobre redes neuronales y grafos computacionales.

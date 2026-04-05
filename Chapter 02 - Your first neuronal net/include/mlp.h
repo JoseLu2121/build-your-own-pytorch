@@ -7,7 +7,7 @@ struct MLP : std::enable_shared_from_this<MLP> {
     std::vector<std::shared_ptr<Layer>> created_layers {}; // A stack of layers
 
     // Constructor
-    MLP(int inputs, std::vector<int> outputs) {};
+    MLP(int inputs, std::vector<int> outputs);
 
     // Compute each layer of the perceptron
     std::shared_ptr<Unit> forward(std::vector<std::shared_ptr<Unit>>& inputs);

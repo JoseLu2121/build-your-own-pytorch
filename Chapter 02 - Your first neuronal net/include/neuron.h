@@ -23,7 +23,7 @@ struct Neuron : std::enable_shared_from_this<Neuron> {
     std::shared_ptr<Unit> bias;            // bias of the neuron
 
     // Constructor
-    Neuron(int inputs){}
+    Neuron(int inputs);
 
     // Forward function to compute the weights with the inputs
     std::shared_ptr<Unit> forward(std::vector<std::shared_ptr<Unit>>& inputs);

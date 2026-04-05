@@ -1,5 +1,5 @@
 #include "unit.h"
-#include "neuron.h"
+#include "../include/neuron.h"
 #include <cstddef> 
 
 using namespace std;
@@ -34,7 +34,7 @@ shared_ptr<Unit> Neuron::forward(vector<shared_ptr<Unit>>& inputs){
     }
 
     // We apply the activation function, we use relu
-    return relu(sum);
+    return operator_tanh(sum);
 }
 
 // Return all the trainable parameters

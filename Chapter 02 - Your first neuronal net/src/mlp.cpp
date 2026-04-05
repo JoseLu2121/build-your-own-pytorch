@@ -1,4 +1,4 @@
-#include "mlp.h"
+#include "../include/mlp.h"
 
 using namespace std;
 
@@ -52,11 +52,11 @@ vector<shared_ptr<Unit>> MLP::parameters(){
 
 // Train the MLP with a dataset
 vector<shared_ptr<Unit>> MLP::fit(vector<vector<shared_ptr<Unit>>> inputs,
-    vector<shared_ptr<Unit>> targets, int num_iter, double learning_rate) {
+    vector<shared_ptr<Unit>> targets, int iterations, double learning_rate) {
 
     vector<shared_ptr<Unit>> output;
     // For each iteration
-    for(int i=0; i < num_iter ; i++){
+    for(int i=0; i < iterations ; i++){
         output = {};
         shared_ptr<Unit> loss_mse_acum = make_shared<Unit>(0.0,"loss"); // Create a loss value Unit
 
@@ -78,12 +78,11 @@ vector<shared_ptr<Unit>> MLP::fit(vector<vector<shared_ptr<Unit>>> inputs,
         // Before we do backpropagation we need to set each gradient to 0.0
         this->zero_grad();
         // Apply backpropagation from the loss Unit
-        loss_mse_acum->backward_total();
+        loss_mse_acum->retropropagate();
 
         // Update the gradient to the trainable parameters -> weight += -(lr * gradient)
         for(auto& p : this->parameters()){
             p->data += -learning_rate * p->grad;
-            
             
         }
 

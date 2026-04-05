@@ -7,14 +7,13 @@
 #include <algorithm>
 #include <random>
 #include <cmath>
-#include "unit.h"
-#include "neuron.h"
+#include "../include/unit.h"
 
 using namespace std;
 // For learning more about the Unit structure, check include/unit.h
 
 // Unit constructor with childrens
-Unit::Unit(double d, const vector<shared_ptr<Unit>>& c = {}, const string& l = "") 
+Unit::Unit(double d, const vector<shared_ptr<Unit>>& c, const string& l) 
     : data(d),    // Assign the value passed as parameter to the data attribute
     children(c),  // Set the children attribute with the parameter c
     label(l),    // We stablish l as the label of the Unit
@@ -25,7 +24,7 @@ Unit::Unit(double d, const vector<shared_ptr<Unit>>& c = {}, const string& l = "
     }
 
 // Same as the previous constructor but without childrens
-Unit::Unit(double d, const string& l)
+Unit::Unit(double d, const string& l)   
 : data(d), 
   grad(0.0), 
   children({}), // We set the children list as empty

@@ -1,14 +1,12 @@
 # Chapter 00 - Basics
 
-## 1.Introducción
-
 En el primer capitulo de este curso se explica la base matemática que hay detrás del Deep Learning, tocando a fondo todos los conceptos, desde los más básicos como, qué es una derivada, a los más complejos como el descenso por el gradiente o la retropropagación, con ejemplos incluidos de entrenamiento de neuronas manualmente.
 
-## 2. Derivada
+## 1. Derivada
 
 La derivada es uno de los conceptos matemáticos más importantes del Deep Learning, ya que nos permite optimizar los parámetros que hacen que las redes neuronales "aprendan".
 
-### 2.1. Definición de derivada
+### 1.1. Definición de derivada
 La derivada de una función **$f$** en un punto **$x$** mide cuánto cambia la función f si modificamos la variable **$x$**.
 
 Matemáticamente se define como: 
@@ -23,7 +21,7 @@ $$f'(2) =  \frac{f(2+0.0001) - f(2)}{0.0001}$$
 
 lo que nos daría $f'(2) = 2$, que equivale a usando las reglas de derivación: $f'(x) = 2$. Lo que significa que para todo $x$, cada vez que incrementamos el valor de $x$ una unidad, $f(x)$, aumenta 2 unidades.
 
-### 2.2. Derivada parcial
+### 1.2. Derivada parcial
 La derivada parcial mide cuanto cambia una expresión en función a una variable, por ejemplo, si tenemos la expresión:
 
 $$ f(x,y) = x - y $$
@@ -32,7 +30,7 @@ La derivada parcial de **$x$** expresada como $\frac{\partial f}{\partial x}$, m
 
 Esto es especialmente útil ya que podemos saber como modificar los pesos de una red neuronal, para que nuestra función de pérdida sea mínima. 
 
-### 2.3. Caso práctico con una neurona
+### 1.3. Caso práctico con una neurona
 
 Pongamos que tengamos una red neuronal que consta únicamente de una sola neurona con una sola entrada y un solo peso:
 
@@ -44,16 +42,16 @@ Pongamos que tengamos una red neuronal que consta únicamente de una sola neuron
 <p>
 
 
-La idea es que nuestra salida sea $y = 10$, pero si nosotros multiplicamos la entrada por el peso tenemos:
-**$$y_{pred} = input \cdot w = 2$$**
+La idea es que nuestra salida sea $y_{target} = 10$, pero si nosotros multiplicamos la entrada por el peso tenemos:
+**$$y = input \cdot w = 2$$**
 
 Entonces, ¿cómo conseguimos que nuestra salida sea 10?, aquí es donde entran las derivadas parciales, entrenaremos esta neurona a mano desde cero. 
 
 Primero, definiremos una función de pérdida como:
-$$ loss = (y_{pred} - y)² $$
+$$ loss = (y - y_{target})² $$
 
 En nuestro caso 
-$$ loss = ((input \cdot w) - y )² $$
+$$ loss = ((input \cdot w) - y_{target} )² $$
 $$ loss = (2 - 10)² = 64 $$
 
 Como vemos el elevado a dos nos permite que el error siempre sea un número positivo. Por tanto, lo que querremos es que este error sea el menor posible, para ello debemos de conocer como varía este según modifiquemos el peso $w$.
@@ -77,13 +75,13 @@ Se puede apreciar que multiplicamos el gradiente por un valor pequeño, este es 
 
 Si computamos de nuevo el $input$ por el nuevo peso $w$ y calculamos la función de error
 
-$$ y_{pred} = 2 \cdot 4.2 = 8.4 $$
+$$ y = 2 \cdot 4.2 = 8.4 $$
 $$ loss = (8.4 - 10)² = 2.56 $$
 
-Como podemos observar nuestra predicción se acerca mucho más a $y=10$ y por consiguiente el error ha disminuido. 
+Como podemos observar nuestra predicción se acerca mucho más a $y_{target}=10$ y por consiguiente el error ha disminuido. 
 ¡Felicidades acabas de entrenar tu primera neurona!
 
-### 2.4. Descenso por el gradiente
+### 1.4. Descenso por el gradiente
 
 Al proceso que acabamos de realizar se le conoce como **descenso por el gradiente**. Es similar a estar con los ojos vendados en la cima de una montaña, e intentar descenderla únicamente conociendo la pendiente que sientes con tus pies.
 
@@ -120,7 +118,7 @@ g++ 01_single_neuron.cpp -o single_neuron.exe && .\single_neuron.exe
 ```
 
 
-### 2.5. Regla de la cadena
+### 1.5. Regla de la cadena
 
 Una vez que ya sabemos como actualizar un parámetro para disminuir una función de coste mediante el uso de su derivada parcial, debemos de conocer en más profundidad como calcular gradientes de forma más eficiente. 
 
@@ -136,7 +134,7 @@ $$\frac{\partial z}{\partial x} = \frac{\partial z}{\partial y} \cdot \frac{\par
 
 Hemos multiplicado el paso intermedio el gradiente del paso intermedio $y$ por el gradiente local de $y$ con respecto a $x$.
 
-#### 2.5.1. Regla de la cadena en una Red Neuronal (Backpropagation)
+#### 1.5.1. Regla de la cadena en una Red Neuronal (Backpropagation)
 
 Imaginemos que ampliamos nuestra red neuronal anterior y le añadimos una neurona más justo antes.
 Esta neurona oculta (se denomina así por que no está conectada a la salida), no solo multiplica su entrada por un peso $w_1$, sino que le suma un valor que denominaremos sesgo o $bias$.
@@ -187,13 +185,13 @@ Por tanto, si incrementamos nuestro peso $w_1$, el error aumentará considerable
 
 
 
-## 3. Siguientes pasos
+## 2. Siguientes pasos
 
 Con esto, ya dispones de las bases matemáticas suficientes para entrenar como funcionan las redes neuronales por dentro, como entrenarlas propagando el gradiente hacia detrás y usando este para actualizar los pesos usando la técnica del descenso por el gradiente.
 
 En el siguiente capítulo veremos como crear una clase en C++ que nos permita automatizar la retropropagación para no tenerla que calcular a mano, y entrenaremos nuestras primeras redes neuronales usando esa misma clase.
 
-## 4. Bibliografía y Recursos Adicionales
+## 3. Bibliografía y Recursos Adicionales
 
 Para la elaboración de este capítulo y para aquellos que quieran profundizar más en las matemáticas del Deep Learning, se recomiendan los siguientes recursos:
 

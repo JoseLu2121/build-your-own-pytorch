@@ -13,10 +13,10 @@
 // A layer of neurons class
 struct Layer : std::enable_shared_from_this<Layer> {
     public:
-    std::vector<std::shared_ptr<Neuron>>  neurons {}; // List of neurons
+    std::vector<std::shared_ptr<Neuron>> neurons {}; // List of neurons
 
     // Constructor
-    Layer(int inputs, int out) {};
+    Layer(int inputs, int out);
 
     // Compute all the neurons
     std::vector<std::shared_ptr<Unit>> forward(std::vector<std::shared_ptr<Unit>>& inputs);

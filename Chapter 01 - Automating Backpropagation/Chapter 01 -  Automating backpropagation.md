@@ -12,7 +12,7 @@ Destacar que este capítulo esta altamente inspirado en el repositorio de mircro
 
 > Implementación de la clase en `/src/unit.cpp`
 
-Unit es la clase más básica del framework **BlockTorch**, esta representa un único valor real, y nos permite realizar operaciones simples entre ellas como la suma, resta, multiplicación y división, creando paralelamente un **grafo de computación**, sobre el que podemos propagar el gradiente hacia detrás.
+Unit es la clase más básica del framework **LearnTorch**, esta representa un único valor real, y nos permite realizar operaciones simples entre ellas como la suma, resta, multiplicación y división, creando paralelamente un **grafo de computación**, sobre el que podemos propagar el gradiente hacia detrás.
 
 Por ejemplo si tenemos:
 ```
@@ -148,7 +148,7 @@ g++ ../tests/00_basic_computation_graph.cpp ops.cpp unit.cpp -I../include -o tes
 
 ## 3. Detalles del código y gestión de memoria
 
-Si nos fijamos en el código, tanto de la clase `Unit` como de las operaciones, encontramos un elemento esencial para la arquitectura de nuestro framework: los punteros inteligentes `std::shared_ptr`. En BlockTorch, todos los nodos están envueltos en ellos.
+Si nos fijamos en el código, tanto de la clase `Unit` como de las operaciones, encontramos un elemento esencial para la arquitectura de nuestro framework: los punteros inteligentes `std::shared_ptr`. En LearnTorch, todos los nodos están envueltos en ellos.
 
 Estos son una evolución de los clásicos punteros de memoria de C++, con la gran ventaja de que implementan un concepto llamado **"propiedad compartida" (shared ownership)** y se autogestionan solos.
 
